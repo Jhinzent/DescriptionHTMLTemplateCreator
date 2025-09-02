@@ -1,0 +1,712 @@
+<div style="
+    border: 1px solid rgb(217, 217, 217);
+    height: max-content;
+    min-height: 1200px;
+    background-color: rgb(250, 250, 250);
+    font-family: 'Microsoft Sans Serif', sans-serif;
+  ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <style type="text/css" scoped="">
+    /* Top Part */
+    #topBar {
+      background-color: rgb(255, 255, 255);
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      min-height: 150px;
+      position: relative;
+    }
+
+    #topBar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-image: url(https://iili.io/JAivBmx.png);
+      background-size: cover;
+      background-position: center center;
+      z-index: 0;
+    }
+
+    #topBarLogo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      float: right;
+      width: 9%;
+      height: 50%; /* Set the height to 50% */
+      background-image: url(https://iili.io/JAivpYg.png);
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+
+    #languageButtonsDiv {
+      float: right;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .categoryChooser:hover {
+      background-color: #e7e7e7 !important; /* Change color on hover */
+    }
+
+    .languageButton {
+      display: block;
+      margin: 3px 3px;
+      padding: 8px 13px; /* Adjust padding as needed */
+      background-color: #121212; /* Set the background color */
+      color: #fff; /* Text color */
+      border-radius: 5px; /* Rounded corners */
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #deckCoreNameHeader {
+      background-color: #0e0e0e;
+      position: absolute;
+      top: 37%; /* Move vertically to about 75% of the topBar height */
+      left: 50;
+      padding: 10px 20px;
+      font-size: 24px;
+      color: #ffffff;
+      z-index: 2;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Descr Containers */
+    #descContainerGer,
+    #descContainerEng {
+      width: 95%;
+      height: fit-content;
+      box-shadow: rgba(0, 0, 0, 0.145) 0px 5px 15px 10px;
+      margin-top: 2.5%;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      padding: 10px;
+      display: flex;
+    }
+    @media only screen and (max-width: 768px) {
+      /* For mobile phones: */
+      #descContainerGer,
+      #descContainerEng {
+        display: block;
+      }
+      #topBar {
+        min-height: 80px;
+      }
+      #deckCoreNameHeader {
+        background-color: #0e0e0e;
+        position: absolute;
+        top: 34.5%; /* Move vertically to about 75% of the topBar height */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally */
+        padding: 7px 15px;
+        font-size: 15px;
+      }
+      #languageButtonsDiv {
+        display: none;
+      }
+      #cardListConainer {
+        width: 100%;
+        padding: 1%;
+      }
+      .hiddenHeader {
+        display: block;
+      }
+      #categoryChooserDiv {
+        display: none;
+      }
+      .variableDescr {
+        display: block;
+      }
+      #hintContainer {
+        display: none;
+      }
+      #descrTextContainer {
+        width: 88%;
+      }
+    }
+    @media only screen and (min-width: 769px) {
+      /* For PC: */
+      #cardListConainer {
+        width: 45%;
+        padding: 1%;
+      }
+      .hiddenHeader {
+        display: none;
+      }
+      #categoryChooserDiv {
+        display: flex;
+      }
+      .variableDescr {
+        display: none;
+      }
+      #descrTextContainer {
+        width: 50%;
+      }
+    }
+    #categoryChooserDiv {
+      justify-content: space-around;
+    }
+    .categoryChooser {
+      border-radius: 2px;
+      box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      color: black;
+      text-align: center;
+      padding: 10%;
+      font-size: 120%;
+      min-width: 130px;
+    }
+
+    .categoryChooser:hover {
+      background-color: #005074; /* Change color on hover */
+    }
+
+    #mosnterDescEng:target {
+      display: block;
+    }
+    #mosnterDescEng:target ~ #hintContainer {
+      display: none;
+    }
+    #spellTrapDescEng:target {
+      display: block;
+    }
+    #spellTrapDescEng:target ~ #hintContainer {
+      display: none;
+    }
+    #extraDescEng:target {
+      display: block;
+    }
+    #extraDescEng:target ~ #hintContainer {
+      display: none;
+    }
+
+    /* */
+
+    #descContainerGer {
+      display: none;
+    }
+    #descContainerGer:target {
+      display: flex;
+    }
+    #descContainerGer:target ~ #descContainerEng {
+      display: none;
+    }
+    #descContainerEng:target {
+      display: flex;
+    }
+    #descContainerEng:target ~ #descContainerGer {
+      display: none;
+    }
+    #langueChooseDiv {
+      float: right;
+    }
+
+    /* */
+
+    #hintContainer {
+      padding: 5%;
+      text-align: center;
+    }
+    #hintContainer small {
+      margin: 0px 10px 0px 10px;
+    }
+    #variableDecrContainerInner {
+      height: max-content;
+      background-color: rgb(249, 249, 249);
+      box-shadow: rgba(0, 26, 70, 0.145) 0px 5px 15px 3px;
+      width: 85%;
+      margin: 0 auto;
+      margin-top: 5%;
+    }
+    a:link {
+      text-decoration: none !important;
+    }
+    #enableMonsterButton {
+      background-color: rgb(246, 246, 246);
+    }
+    #enableSpellTrapButton {
+      background-color: rgb(246, 246, 246);
+    }
+    #enableExtraButton {
+      background-color: rgb(246, 246, 246);
+    }
+    /* Descr Contents */
+
+    .deckList {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .deckList ul {
+      width: 90%;
+      border-bottom: solid 3px rgba(0, 49, 99, 0.866);
+
+      margin: 0px auto;
+      padding: 20px 0px 20px 0px;
+
+      text-align: center;
+      font-size: 1.05em;
+    }
+    #descrTextContainer {
+      box-shadow: rgba(0, 0, 0, 0.145) 0px 5px 15px 3px;
+      margin: 2%;
+      padding: 4%;
+    }
+    .infoHeader {
+      padding: 10px;
+      border-bottom: solid 2px rgb(182, 182, 182);
+      margin-bottom: 20px;
+    }
+    .infoContent {
+      margin: 0px 0px 0px 10px;
+    }
+    .infoContainer {
+      margin-bottom: 10%;
+    }
+    #cardListHeader {
+      text-align: center;
+      border-bottom: solid 2px rgb(182, 182, 182);
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      width: 85%;
+      margin-left: 7.5%;
+      /* RARITYS */
+    }
+    .descrRarity {
+      margin-left: 5px;
+      padding: 5px 2px 5px 2px;
+      border-radius: 5px;
+      min-width: 20px;
+      box-shadow: 3px 2px 5px 0px rgba(0, 0, 0, 0.35);
+
+      display: inline-block;
+    }
+    #descrRarityC {
+      background: linear-gradient(
+          45deg,
+          #bebebe,
+          #989898 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          #a5a5a5,
+          #a2a2a2 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          #b0b0b0,
+          #828282 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    #descrRarityR {
+      background: linear-gradient(
+          45deg,
+          #d2d2d2,
+          #bfbfbf 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          #e6e6e6,
+          #a8a8a8 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          #d0d0d0,
+          #c1c1c1 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    #descrRarityUR {
+      background: linear-gradient(
+          45deg,
+          rgb(255, 248, 37),
+          rgb(255, 244, 37) 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          rgb(255, 208, 20),
+          rgb(255, 231, 19) 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          rgb(248, 215, 0),
+          rgb(255, 224, 24) 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    #descrRaritySR {
+      background: linear-gradient(
+          45deg,
+          rgb(255, 215, 37),
+          rgb(244, 204, 24) 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          rgb(250, 218, 91),
+          rgb(255, 235, 52) 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          rgb(255, 196, 35),
+          rgb(253, 179, 50) 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    #descrRaritySER {
+      background: linear-gradient(
+          45deg,
+          #fff562,
+          #fff12d 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          #eade30,
+          #fbed23 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          rgb(255, 217, 80),
+          rgb(240, 255, 80) 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    #descrRarityGLD {
+      background: linear-gradient(
+          45deg,
+          rgb(255, 204, 19),
+          rgb(224, 178, 13) 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          rgb(231, 198, 7),
+          rgb(225, 195, 2) 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          rgb(233, 184, 4),
+          rgb(255, 206, 31) 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    #descrRarityCOL {
+      background: linear-gradient(
+          45deg,
+          #ff1e6d,
+          #e12063 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          #ce1455,
+          #9a0d3f 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          #ce245f,
+          #da2d6a 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    #descrRarityULT {
+      background: linear-gradient(
+          45deg,
+          #8a8a8a,
+          #8b8b8b 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          -45deg,
+          #c6c6c6,
+          #c6c6c6 50%,
+          transparent 50%,
+          transparent
+        ),
+        linear-gradient(
+          135deg,
+          #909090,
+          #828282 50%,
+          transparent 50%,
+          transparent
+        );
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+  </style>
+  <!-- body ------------------------------------------------------------- -->
+  <div id="topBar">
+    <div id="topBarColor"></div>
+    <div id="topBarLogo"></div>
+    <h2 class="header" id="deckCoreNameHeader">Volcanic Core</h2>
+    <div id="languageButtonsDiv">
+      <a href="#descContainerGer">
+        <div class="languageButton" id="languageButtonsGerman">German</div>
+      </a>
+      <a href="#descContainerEng">
+        <div class="languageButton" id="languageButtonsEnglish">English</div>
+      </a>
+    </div>
+  </div>
+  <div id="descContainerGer">
+    <div id="cardListConainer">
+      <h3 id="cardListHeader">Card List</h3>
+      <div id="categoryChooserDiv">
+        <a href="#mosnterDesc">
+          <div class="categoryChooser" id="enableMonsterButton">Monster</div>
+        </a>
+        <a href="#spellTrapDesc">
+          <div class="categoryChooser" id="enableSpellTrapButton">
+            Spells/Traps
+          </div>
+        </a>
+        <a href="#extraDesc">
+          <div class="categoryChooser" id="enableExtraButton">Extra Deck</div>
+        </a>
+      </div>
+      <div id="variableDecrContainer">
+        <div id="variableDecrContainerInner">
+          <div id="hintContainer">
+            <i class="fa-solid fa-arrow-up"></i>
+            <small>Click the categorys above!</small>
+            <i class="fa-solid fa-arrow-up"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="descrTextContainer">
+      <div class="infoContainer">
+        <h3 class="infoHeader">Ähnliche Karten</h3>
+        <div>
+          <p class="infoContent">
+            Wir haben eine große Auswahl an ähnlichen Karten, Zubehör und mehr
+            auf Lager!</p></div>
+      </div>
+      <div class="infoContainer">
+        <h3 class="infoHeader">Versandinformationen</h3>
+        <p class="infoContent">
+          Alle Karten werden sicher in Toploadern verschickt, um während des
+          Transports geschützt zu sein.
+          <br><br>
+          Mit unserer Versandoption "Standard International" werden Ihre Karten
+          in einem Brief mit Sendungsverfolgung verschickt, um Ihnen zusätzliche
+          Sicherheit zu geben.
+          <br><br>
+          Wenn Sie eine andere Versandmethode bevorzugen oder Fragen zu unseren
+          Versandrichtlinien haben, können Sie uns gerne eine Nachricht senden.
+        </p>
+      </div>
+      <div class="infoContainer">
+        <h3 class="infoHeader">Kartenzustand</h3>
+        <p class="infoContent">
+          Bitte beachten Sie, dass die Produktbilder möglicherweise nicht genau
+          der Karte entsprechen, die Sie erhalten werden. Der Zustand der Karte
+          entspricht jedoch immer den angegebenen Details.
+          <br><br>
+          Wenn Sie Fragen zur angegebenen Bewertung oder zum Zustand einer
+          bestimmten Karte haben, zögern Sie bitte nicht, uns für weitere
+          Informationen zu kontaktieren.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ___________________________________________________________________________________________________________________ -->
+  <div id="descContainerEng">
+    <div id="cardListConainer">
+      <h3 class="header" id="cardListHeader">Card List</h3>
+      <div id="categoryChooserDiv">
+        <a href="#mosnterDescEng">
+          <div class="categoryChooser" id="enableMonsterButton">Monster</div>
+        </a>
+        <a href="#spellTrapDescEng">
+          <div class="categoryChooser" id="enableSpellTrapButton">
+            Spells/Traps
+          </div>
+        </a>
+        <a href="#extraDescEng">
+          <div class="categoryChooser" id="enableExtraButton">Extra Deck</div>
+        </a>
+      </div>
+      <div id="variableDecrContainer">
+        <div id="variableDecrContainerInner">
+          <div class="variableDescr" id="mosnterDescEng">
+            <li class="deckList">
+              <ul class="hiddenHeader">
+                <b>MONSTERS</b>
+              </ul>
+              <ul>
+              	Volcanic Trooper 3x
+              	<b class="descrRarity" id="descrRarityUR">UR</b>
+              </ul>
+              <ul>
+              	Volcanic Emperor 1x
+              	<b class="descrRarity" id="descrRarityUR">UR</b>
+              </ul>
+              <ul>
+              	Volcanic Rocket 3x
+              	<b class="descrRarity" id="descrRarityR">R</b>
+              </ul>
+              <ul>
+              	Volcanic Rimfire 3x
+              	<b class="descrRarity" id="descrRarityR">R</b>
+              </ul>
+              <ul>
+              	Volcanic Shell 3x
+              	<b class="descrRarity" id="descrRarityC">C</b>
+              </ul>
+              <ul>
+              	Volcanic Scattershot 3x
+              	<b class="descrRarity" id="descrRarityC">C</b>
+              </ul>
+              <ul>
+              	Volcanic Doomfire 1x
+              	<b class="descrRarity" id="descrRarityC">C</b>
+              </ul>
+              <ul>
+              	Volcanic Queen 1x
+              	<b class="descrRarity" id="descrRarityC">C</b>
+              </ul>
+             </li>
+          </div>
+          <!-- ___________________________________________________________________________________________________________________ -->
+          <div class="variableDescr" id="spellTrapDescEng">
+            <li class="deckList">
+              <ul class="hiddenHeader">
+                <b>SPELLS/TRAPS</b>
+              </ul>
+              <ul>
+              	Fire Ejection 3x
+              	<b class="descrRarity" id="descrRaritySR">SR</b>
+              </ul>
+              <ul>
+              	Volcanic Blaze Accelerator 3x
+              	<b class="descrRarity" id="descrRaritySR">SR</b>
+              </ul>
+              <ul>
+              	Tri-Blaze Accelerator 1x
+              	<b class="descrRarity" id="descrRarityC">C</b>
+              </ul>
+              <ul>
+              	Volcanic Emission 3x
+              	<b class="descrRarity" id="descrRaritySR">SR</b>
+              </ul>
+              <ul>
+              	Volcanic Inferno 3x
+              	<b class="descrRarity" id="descrRaritySR">SR</b>
+              </ul>
+              <ul>
+              	Blaze Accelerator Reload 3x
+              	<b class="descrRarity" id="descrRarityC">C</b>
+              </ul>
+             </li>
+          </div>
+          <!-- ___________________________________________________________________________________________________________________ -->
+          <div class="variableDescr" id="extraDescEng">
+            <li class="deckList">
+              <ul class="hiddenHeader">
+                <b>EXTRA DECK</b>
+              </ul>
+<ul>
+                Deck does not contain extra deck cards. 
+              </ul>             </li>
+          </div>
+          <div id="hintContainer">
+            <i class="fa-solid fa-arrow-up"></i>
+            <small>Click the categorys above!</small>
+            <i class="fa-solid fa-arrow-up"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="descrTextContainer">
+      <div class="infoContainer">
+        <h3 class="infoHeader">Related Cards</h3>
+        <div>
+          <p class="infoContent">
+            We have a wide selection of related cards, accessories, and more in
+            stock!</p></div>
+      </div>
+      <div class="infoContainer">
+        <h3 class="infoHeader">Shipping Info</h3>
+        <p class="infoContent">
+          All cards are shipped safely to ensure their protection during
+          transit.
+          <br><br>
+          With our "Standard International" shipping option, your cards will be
+          shipped in a tracked letter for added peace of mind.<br><br>
+          If you prefer a different shipping method or have any questions about
+          our shipping policies, please feel free to message us.
+        </p>
+      </div>
+      <div class="infoContainer">
+        <h3 class="infoHeader">Card Condition</h3>
+        <p class="infoContent">
+          Please note that the product images may not be an exact representation
+          of the card you will receive. However, the card condition will always
+          match the stated details.
+          <br><br>
+          If you have any questions about the stated grading or the condition of
+          a specific card, please don't hesitate to message us for more
+          information.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

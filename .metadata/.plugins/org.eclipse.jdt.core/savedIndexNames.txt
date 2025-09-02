@@ -1,0 +1,2 @@
+INDEX VERSION 1.132+H:\YuGiOh\Ebay\Template Creator\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
